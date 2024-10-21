@@ -1,3 +1,8 @@
+### Benefits of using IronPdf in Aspire.NET
+1. Easy container-setup - no longer have to fiddle around with Docker!
+2. Easy service connections
+3. Orchestrate, organize, and monitor all of your software components & services in one place
+
 ### IronPDF and OpenAI Using Aspire.NET
 1. Retreive your OpenAI credentials key and endpoint from the OpenAI platform.
 2. Fill-in your OpenAI credentials on line 60 of IronPdf.Aspire.AI.ApiServce.cs
