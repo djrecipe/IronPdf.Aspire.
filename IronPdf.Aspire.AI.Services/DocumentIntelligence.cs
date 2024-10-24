@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using IronPdf.GrpcLayer;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,6 +45,7 @@ namespace IronPdf.Aspire.AI.ServiceDefaults
             await doc.Memorize(new int[]{0}); // optionally pass AI instance or use AI instance directly
         }
     }
+
     public static class DocumentIntelligenceExtensions
     {
 
@@ -57,8 +53,8 @@ namespace IronPdf.Aspire.AI.ServiceDefaults
         {
             
 // SETUP AI
-            var azureEndpoint = "<<>>";
-            var apiKey = "<<>>";
+            var azureEndpoint = builder.Configuration["AzureOpenAI:Endpoint"];
+            var apiKey = builder.Configuration["AzureOpenAI:ApiKey"];
             var kernel_builder = Kernel.CreateBuilder()
                 .AddAzureOpenAITextEmbeddingGeneration("oaiembed", azureEndpoint, apiKey)
                 .AddAzureOpenAIChatCompletion("oaichat", azureEndpoint, apiKey);

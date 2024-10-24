@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IronPdf.Aspire.AI.AppHost
+﻿namespace IronPdf.Aspire.AI.AppHost
 {
     public class ChromaResource(string name) : ContainerResource(name), IResourceWithConnectionString
     {
@@ -30,13 +24,14 @@ namespace IronPdf.Aspire.AI.AppHost
             string name,
             int? port = null)
         {
-            var resource = new ChromaResource(name);
-
-            resource.IsSslEnabled = builder.ExecutionContext.IsPublishMode;
+            var resource = new ChromaResource(name)
+            {
+                IsSslEnabled = builder.ExecutionContext.IsPublishMode
+            };
 
             return builder.AddResource(resource)
                 .WithImage("chromadb/chroma")
-                .WithImageTag("0.5.12.dev13")
+                .WithImageTag(builder.Configuration["Chroma:ChromaVersion"] ?? "0.5.12.dev13")
                 .WithEndpoint(port: port, name: IronEngineResource.PrimaryEndpointName, targetPort: 8000, scheme: "http");
         }
     }

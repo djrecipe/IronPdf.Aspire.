@@ -10,6 +10,9 @@ var chromadb = builder.AddChromaDb("chromadb");
 var apiService = builder.AddProject<Projects.IronPdf_Aspire_AI_ApiService>("apiservice");
 
 builder.AddProject<Projects.IronPdf_Aspire_AI_Web>("webfrontend")
+    .WithEnvironment("AzureOpenAI:Endpoint", builder.Configuration["AzureOpenAI:Endpoint"])
+    .WithEnvironment("AzureOpenAI:ApiKey", builder.Configuration["AzureOpenAI:ApiKey"])
+    .WithEnvironment("IronPdf:LicenseKey", builder.Configuration["IronPdf:LicenseKey"])
     .WithExternalHttpEndpoints()
     .WithReference(apiService)
     .WithReference(pdfEngine)

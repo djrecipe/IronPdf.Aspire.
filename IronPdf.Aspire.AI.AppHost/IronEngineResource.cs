@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IronPdf.Aspire.AI.AppHost
+﻿namespace IronPdf.Aspire.AI.AppHost
 {
     public class IronEngineResource(string name) : ContainerResource(name), IResourceWithConnectionString
     {
@@ -36,7 +30,7 @@ namespace IronPdf.Aspire.AI.AppHost
 
             return builder.AddResource(resource)
                 .WithImage("ironsoftwareofficial/ironpdfengine")
-                .WithImageTag("2024.10.3")
+                .WithImageTag(builder.Configuration["IronPdf:EngineVersion"] ?? "2024.10.8")
                 .WithEndpoint(port: port, name: IronEngineResource.PrimaryEndpointName, targetPort: 33350, scheme: "http");
         }
 
