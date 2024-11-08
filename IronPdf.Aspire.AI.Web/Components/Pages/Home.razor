@@ -11,128 +11,133 @@
 <PageTitle>Home</PageTitle>
 
 <div class="summarize__container">
-    <h3 class="summarize__label">Summarize URL</h3>
+  <h3 class="summarize__label">Summarize URL</h3>
 
-    <div class="summarize__cta">
-        <label class="cta__label">Please enter a URL to summarize the first page</label>
+  <div class="summarize__cta">
+    <label class="cta__label">Please enter a URL to summarize the first page</label>
 
-        <div class="summarize__input">
-            <input class="input__url" type="text" @bind-value="URL" />
-            <button class="summarize__btn" @onclick="SummarizePDF">Summarize</button>
-        </div>
+    <div class="summarize__input">
+      <input class="input__url" type="text" @bind-value="URL" />
+      <button class="summarize__btn" @onclick="SummarizePDF">Summarize</button>
     </div>
+  </div>
 
-    <p class="summarize__text">
-        @if (String.IsNullOrEmpty(Summary))
-        {
-            <span>Summarized text should appear here!</span>
-        }
-        else
-        {
-            @(Summary)
-        }
-    </p>
+  <p class="summarize__text">
+    @if (String.IsNullOrEmpty(Summary))
+    {
+      <span>Summarized text should appear here!</span>
+    }
+    else
+    {
+      @(Summary)
+    }
+  </p>
 </div>
 
 <h3 class="summarize__label">Summarize PDF</h3>
 <div class="summarize__container">
-    <div class="summarize__actions">
-        <div class="summarize__drag-drop__area" @ref="_DropArea">
-            <span>Drag & Drop or click to upload file</span>
-        </div>
-
-        <InputFile OnChange="HandleFileUpload" class="hidden-input-file" hidden />
+  <div class="summarize__actions">
+    <div class="summarize__drag-drop__area" @ref="_DropArea">
+      <span>Drag & Drop or click to upload file</span>
     </div>
 
-    <p class="summarize__text">
+    <InputFile OnChange="HandleFileUpload" class="hidden-input-file" hidden />
+  </div>
 
-        @if (String.IsNullOrEmpty(Summary2))
-        {
-            <span>Summarized text should appear here!</span>
-        }
-        else
-        {
-            @(Summary2)
-        }
-    </p>
+  <p class="summarize__text">
+
+    @if (String.IsNullOrEmpty(Summary2))
+    {
+      <span>Summarized text should appear here!</span>
+    }
+    else
+    {
+      @(Summary2)
+    }
+  </p>
 </div>
 
 <h3 class="summarize__label">Chat with PDF</h3>
 <div class="summarize__container">
-    <div class="summarize__actions">
-        <div class="summarize__drag-drop__area" @ref="_DropArea2">
-            <span>Drag & Drop or click to upload file</span>
-        </div>
-
-        <InputFile OnChange="HandleFileUpload2" class="hidden-input-file2" hidden />
+  <div class="summarize__actions">
+    <div class="summarize__drag-drop__area" @ref="_DropArea2">
+      <span>Drag & Drop or click to upload file</span>
     </div>
 
-    <div class="summarize__cta">
-        <div class="summarize__input">
-            <input class="input__url" type="text" @bind-value="Question" />
-            <button class="summarize__btn" @onclick="Callback">Ask AI</button>
-        </div>
+    <InputFile OnChange="HandleFileUpload2" class="hidden-input-file2" hidden />
+  </div>
+
+  <div class="summarize__cta">
+    <div class="summarize__input">
+      <input class="input__url" type="text" @bind-value="Question" />
+      <button class="summarize__btn" @onclick="Callback">Ask AI</button>
     </div>
+  </div>
 
-    <p class="summarize__text">
+  <p class="summarize__text">
 
-        @if (String.IsNullOrEmpty(Summary3))
-        {
-            <span>Summarized text should appear here!</span>
-        }
-        else
-        {
-            @(Summary3)
-        }
-    </p>
+    @if (String.IsNullOrEmpty(Summary3))
+    {
+      <span>Summarized text should appear here!</span>
+    }
+    else
+    {
+      @(Summary3)
+    }
+  </p>
 </div>
 
 <script>
-    window.downloadFileFromStream = async (fileName, contentStreamReference) => {
-      const arrayBuffer = await contentStreamReference.arrayBuffer();
-      const blob = new Blob([arrayBuffer]);
-      const url = URL.createObjectURL(blob);
-      const anchorElement = document.createElement('a');
-      anchorElement.href = url;
-      anchorElement.download = fileName ?? '';
-      anchorElement.click();
-      anchorElement.remove();
-      URL.revokeObjectURL(url);
-    }
+  window.downloadFileFromStream = async (fileName, contentStreamReference) => {
+  const arrayBuffer = await contentStreamReference.arrayBuffer();
+  const blob = new Blob([arrayBuffer]);
+  const url = URL.createObjectURL(blob);
+  const anchorElement = document.createElement('a');
+  anchorElement.href = url;
+  anchorElement.download = fileName ?? '';
+  anchorElement.click();
+  anchorElement.remove();
+  URL.revokeObjectURL(url);
+  }
 </script>
 
 @code {
-    public string Summary { get; set; } = null;
-    public string Question { get; set; } = "Is a .NET 5 library usable with .NET Core 3.1?";
-    public string Summary2 { get; set; } = null;
-    public string Summary3 { get; set; } = null;
+  public string Summary { get; set; } = null;
+  public string Question { get; set; } = "Is a .NET 5 library usable with .NET Core 3.1?";
+  public string Summary2 { get; set; } = null;
+  public string Summary3 { get; set; } = null;
 
-    private PdfDocument mypdf;
+  private PdfDocument mypdf;
 
-    public string URL { get; set; } = "https://en.wikipedia.org/wiki/Elvis_Presley";
+  public string URL { get; set; } = "https://en.wikipedia.org/wiki/Elvis_Presley";
 
-    private async Task ExportPDF()
-    {
-        var pdf = await PdfGenerator.GeneratePdfFromHtml("<h1>foo</h1>");
-        using var streamRef = new DotNetStreamReference(stream: pdf);
-        await JSRuntime.InvokeVoidAsync("downloadFileFromStream", "HelloWorld.pdf", streamRef);
-    }
+  private async Task ExportPDF()
+  {
+    var pdf = await PdfGenerator.GeneratePdfFromHtml("<h1>foo</h1>");
+    using var streamRef = new DotNetStreamReference(stream: pdf);
+    await JSRuntime.InvokeVoidAsync("downloadFileFromStream", "HelloWorld.pdf", streamRef);
+  }
 
-    private async Task SummarizePDF()
-    {
-        IronPdf.License.LicenseKey = "IRONPDF.DEVTEAM.IX1465-92A278403D-F5U2BHGMSE-XEUGFHNGOQL5-6D44POEHBLGW-N4ACGZJOJI3C-INR3PPCPRZD5-ZFTNAP-LSEN2ZUUJGSVUA-UNIT.TEST-MW2IAU.RENEW.SUPPORT.14.JUL.2029";
-        var result = await DocumentIntelligence.SummarizeUrl(URL);
-        Summary = result;
-    }
+  private async Task SummarizePDF()
+  {
+    var result = await DocumentIntelligence.SummarizeUrl(URL);
+    Summary = result;
+  }
 
-    private IJSObjectReference? _Module;
+  private IJSObjectReference? _Module;
 
-    private ElementReference _DropArea;
+  private ElementReference _DropArea;
 
-    private ElementReference _DropArea2;
+  private ElementReference _DropArea2;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
+  protected override void OnInitialized()
+  {
+    IronPdf.License.LicenseKey = Configuration["IronPdf:LicenseKey"];
+    base.OnInitialized();
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
         if (firstRender)
         {
             _Module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./main.js");
@@ -143,10 +148,6 @@
         await base.OnAfterRenderAsync(firstRender);
     }
 
-    // private async Task BrowseFile()
-    // {
-    //     await _Module.InvokeVoidAsync("browse_file");
-    // }
 
     private async Task HandleFileUpload(InputFileChangeEventArgs e)
     {
@@ -159,8 +160,6 @@
         await stream.CopyToAsync(memoryStream);
 
         memoryStream.Position = 0;
-
-        IronPdf.License.LicenseKey = "IRONPDF.DEVTEAM.IX1465-92A278403D-F5U2BHGMSE-XEUGFHNGOQL5-6D44POEHBLGW-N4ACGZJOJI3C-INR3PPCPRZD5-ZFTNAP-LSEN2ZUUJGSVUA-UNIT.TEST-MW2IAU.RENEW.SUPPORT.14.JUL.2029";
 
         Summary2 = await DocumentIntelligence.SummarizePdf(new PdfDocument(memoryStream));
     }
@@ -176,9 +175,6 @@
         await stream.CopyToAsync(memoryStream);
 
         memoryStream.Position = 0;
-
-        IronPdf.License.LicenseKey = "IRONPDF.DEVTEAM.IX1465-92A278403D-F5U2BHGMSE-XEUGFHNGOQL5-6D44POEHBLGW-N4ACGZJOJI3C-INR3PPCPRZD5-ZFTNAP-LSEN2ZUUJGSVUA-UNIT.TEST-MW2IAU.RENEW.SUPPORT.14.JUL.2029";
-
         mypdf = new PdfDocument(memoryStream);
 
         await DocumentIntelligence.Memorize(mypdf);

@@ -6,8 +6,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronPdf.Aspire.AI.AppHost",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronPdf.Aspire.AI.ServiceDefaults", "IronPdf.Aspire.AI.ServiceDefaults\IronPdf.Aspire.AI.ServiceDefaults.csproj", "{8362AF05-1363-4F0B-A7F7-927DD44D8486}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronPdf.Aspire.AI.ApiService", "IronPdf.Aspire.AI.ApiService\IronPdf.Aspire.AI.ApiService.csproj", "{506A13D9-052D-4A06-AAC7-F1AC96C0A9BE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IronPdf.Aspire.AI.Web", "IronPdf.Aspire.AI.Web\IronPdf.Aspire.AI.Web.csproj", "{224C4D3F-A7F2-4253-8CD0-3EF0F163B8A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IronPdf.Aspire.AI.Services", "IronPdf.Aspire.AI.Services\IronPdf.Aspire.AI.Services.csproj", "{BCE0288F-9232-43BC-BCAC-D4601DC553EA}"
@@ -26,10 +24,6 @@ Global
 		{8362AF05-1363-4F0B-A7F7-927DD44D8486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8362AF05-1363-4F0B-A7F7-927DD44D8486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8362AF05-1363-4F0B-A7F7-927DD44D8486}.Release|Any CPU.Build.0 = Release|Any CPU
-		{506A13D9-052D-4A06-AAC7-F1AC96C0A9BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{506A13D9-052D-4A06-AAC7-F1AC96C0A9BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{506A13D9-052D-4A06-AAC7-F1AC96C0A9BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{506A13D9-052D-4A06-AAC7-F1AC96C0A9BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{224C4D3F-A7F2-4253-8CD0-3EF0F163B8A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{224C4D3F-A7F2-4253-8CD0-3EF0F163B8A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{224C4D3F-A7F2-4253-8CD0-3EF0F163B8A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
